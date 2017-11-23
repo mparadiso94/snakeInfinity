@@ -15,6 +15,7 @@ public class Grid : MonoBehaviour {
     public GameObject gameOverEffect;
     public UIController ui;
     public Snake snake;
+    public Environment env;
 
     public Transform nodePrefab;
     Dictionary<string, Transform> gridDictionary;
@@ -73,6 +74,7 @@ public class Grid : MonoBehaviour {
 
     public IEnumerator SpawnGrid()
     {
+
         Debug.Log("Spawning grid");
         //front panel
         for (int x = 0; x < gridSize; x++)
@@ -89,6 +91,7 @@ public class Grid : MonoBehaviour {
             }
             yield return new WaitForSeconds(timeBetweenNodeSpawns);
         }
+
         //left panel
         for (int y = 0; y < gridSize; y++)
         {
@@ -103,6 +106,7 @@ public class Grid : MonoBehaviour {
             }
             yield return new WaitForSeconds(timeBetweenNodeSpawns);
         }
+
         //right panel
         for (int y = 0; y < gridSize; y++)
         {
@@ -118,6 +122,7 @@ public class Grid : MonoBehaviour {
             }
             yield return new WaitForSeconds(timeBetweenNodeSpawns);
         }
+
         //back panel
         for (int x = 0; x < gridSize; x++)
         {
@@ -133,6 +138,11 @@ public class Grid : MonoBehaviour {
             }
             yield return new WaitForSeconds(timeBetweenNodeSpawns);
         }
+
+        env.SpawnFrontPanel();
+        env.SpawnLeftPanel();
+        env.SpawnBackPanel();
+        env.SpawnRightPanel();
         GameManager.gameStarted = true;
         ui.ShowMenu(UIController.UI.gameUI);
     }
